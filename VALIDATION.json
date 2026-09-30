@@ -1,0 +1,32 @@
+{
+  "app": "soumission-vip",
+  "passed": 25,
+  "checks": [
+    "Blueprint persistent disk and health endpoint",
+    "Single-worker deployment",
+    "14 Python files compile",
+    "Health endpoint",
+    "Home page and branding",
+    "Supplied logo served unchanged",
+    "/admin renders",
+    "/invite?token=invalid renders",
+    "Fresh installation uses supplied logo",
+    "Fresh brand and no owner",
+    "Demo login disabled",
+    "Wrong setup password denied",
+    "Owner onboarding",
+    "Second owner prevented",
+    "Owner admin state",
+    "Finish onboarding",
+    "Customer cannot read admin state",
+    "Client creates job",
+    "Business submits quote",
+    "Client sees quote",
+    "Business cannot delete client job",
+    "Invite uses Render URL",
+    "Public exports blocked",
+    "Owner login works",
+    "No misleading demo login controls"
+  ],
+  "limits": "Flask test-client and isolated temporary data; no actual Render deployment, browser visual test, provider integration or Linux Gunicorn process executed."
+}

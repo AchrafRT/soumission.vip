@@ -1,0 +1,594 @@
+DIRECTORYFORGE FOUNDATION v1
+FRAMEWORK + WORKFLOW + TECH STACK SUMMARY
+============================================================
+
+PURPOSE
+-------
+DirectoryForge is a Python-first, filesystem-backed directory and quote marketplace foundation.
+It is designed so one codebase can run:
+- locally on Windows as a desktop-style app,
+- in a browser as a normal web app,
+- and online on Render using the same Python backend and frontend.
+
+The architecture follows a strict rule:
+- HTML/CSS/JavaScript = frontend presentation layer.
+- Python = all backend logic, servers, orchestration, security, payments, patching, exporting, and automation.
+- JSON = persistent database / hard-drive state.
+- TXT = lightweight runtime / RAM-like state, logs, sessions, and renovation scripts.
+- Folders/directories = part of the database and workflow architecture.
+
+============================================================
+1. TECH STACK
+============================================================
+
+FRONTEND
+--------
+File:
+    frontend/index.html
+
+The complete frontend is kept in one file.
+That file contains:
+- HTML structure
+- CSS styling
+- JavaScript UI logic
+
+There is no separate frontend framework requirement.
+The same frontend is used by both the local desktop app and the hosted web version.
+
+DESKTOP SHELL
+-------------
+Technology:
+    pywebview
+
+Launcher:
+    Launch_DirectoryForge.bat
+
+The .BAT launcher starts Python, which opens the web application inside a native desktop-style pywebview window.
+This gives the application a Windows software feel while keeping the UI web-based.
+
+BACKEND
+-------
+Language:
+    Python
+
+Python is responsible for essentially the entire backend, including:
+- HTTP server
+- application/business logic
+- authentication and security
+- sessions
+- storage layer
+- patch/renovation execution
+- deployment export generation
+- commit-diff bundle generation
+- Stripe integration
+- PayPal integration
+- account permissions
+- invite handling
+- marketplace logic
+- quote/job routing
+
+Important backend files include:
+    server.py
+    app.py
+    app_logic.py
+    storage.py
+    security.py
+    sessions.py
+    patch_engine.py
+    export_engine.py
+    payments.py
+
+DATABASE / STORAGE MODEL
+------------------------
+Persistent state uses JSON files.
+Runtime/session/audit state uses TXT files.
+
+JSON is treated as the application's hard drive.
+TXT is treated as lightweight runtime memory and workflow state.
+
+Main persistent JSON datasets:
+    config.json
+    users.json
+    employees.json
+    businesses.json
+    homeowners.json
+    jobs.json
+    quotes.json
+    invites.json
+    analytics.json
+    service_tree.json
+    locations.json
+
+Runtime TXT streams:
+    runtime/sessions.txt
+    runtime/audit.txt
+    runtime/runtime.txt
+
+Private local-only secrets can live under:
+    data/private/
+
+Those private files are excluded from deployment-safe exports.
+
+SEED DATA
+---------
+Initial data is stored under:
+    seed/
+
+The first launch copies seed JSON into the active DATA_DIR when needed.
+
+The foundation was seeded from the HousePro / Quotes.pro architecture with:
+- 3 specialty roots
+- 9 main categories
+- 54 service sub-branches
+- 66 total service nodes
+- 18 regional hubs
+- 27 Montreal example neighbourhood zones
+
+The service-tree JSON keeps the detailed marketing architecture associated with those nodes.
+
+DEPENDENCIES
+------------
+Hosted/server mode is intentionally lightweight and uses Python's standard library where possible.
+
+Local desktop requirement:
+    pywebview>=5.0,<7.0
+
+============================================================
+2. APPLICATION FRAMEWORK
+============================================================
+
+LOCAL STARTUP FLOW
+------------------
+Primary launcher:
+    Launch_DirectoryForge.bat
+
+Supporting launch/install files:
+    Install_Local.bat
+    Launch_Browser_Server.bat
+
+Normal local startup flow:
+1. User launches Launch_DirectoryForge.bat.
+2. Python starts the backend/server logic.
+3. pywebview opens the frontend in a native desktop window.
+4. The application loads JSON/TXT state from DATA_DIR.
+5. User passes the developer gate.
+6. On first setup, the owner creates an owner account.
+7. The owner configures branding, service tree, users, marketplace settings, and monetization.
+
+DEFAULT LOCAL DEVELOPMENT ACCESS
+--------------------------------
+Developer password:
+    admin
+
+Demo account:
+    username: demo
+    password: admin
+
+The demo account is read-only.
+The provided Render configuration disables the demo account online with:
+    DISABLE_DEMO=1
+
+OWNER / ACCOUNT FRAMEWORK
+-------------------------
+The foundation supports:
+- owner account
+- employees/staff
+- businesses/contractors
+- homeowners/clients
+
+Employees can be assigned access to specific tabs/features.
+Permissions are enforced in backend logic, not only hidden in the UI.
+
+The owner can manage:
+- directory name
+- slogan
+- logo
+- base URL
+- service tree
+- businesses
+- homeowners/clients
+- employees
+- invitations
+- jobs
+- quotes
+- marketplace settings
+- advertising
+- monetization settings
+- payment processors
+
+MARKETPLACE MODEL
+-----------------
+The application is bidirectional.
+
+Homeowners/clients can:
+- browse/search companies
+- browse services
+- create accounts
+- post jobs
+- request quotes
+- contact a specific business directly
+
+Businesses can:
+- create/list their company
+- browse relevant jobs
+- respond to quote opportunities
+- manage their marketplace presence
+
+A direct quote request to a specific company is kept separate from the general public job board.
+
+============================================================
+3. PATCH / RENOVATION WORKFLOW
+============================================================
+
+CORE IDEA
+---------
+The first ZIP is the foundation.
+Future software changes can be delivered as Python source stored inside .txt renovation/patch files.
+
+Two compatible patch channels exist:
+
+    Patch/
+    Renovation/
+
+PATCH INPUT LOCATIONS
+---------------------
+Supported single-file locations:
+    Patch/patch.txt
+    Renovation/patch.txt
+
+Supported inbox locations:
+    Patch/inbox/*.txt
+    Renovation/inbox/*.txt
+
+A patch file contains Python source even though the extension is .txt.
+
+REFRESH / APPLY PATCH FLOW
+--------------------------
+The owner presses:
+    Refresh / Apply Patch
+
+The application then:
+1. Detects available patch/renovation TXT scripts.
+2. Creates a pre-patch ZIP snapshot.
+3. Executes the patch as Python from the application root.
+4. Exposes APP_ROOT as an environment variable to the patch.
+5. If successful, moves the patch into the matching patched/ folder.
+6. If it fails, preserves it inside the matching failed/ folder.
+
+SUCCESS LOCATIONS
+-----------------
+    Patch/patched/
+    Renovation/patched/
+
+FAILURE LOCATIONS
+-----------------
+    Patch/failed/
+    Renovation/failed/
+
+SNAPSHOT LOCATIONS
+------------------
+    Patch/snapshots/
+    Renovation/snapshots/
+
+This creates an incremental renovation model instead of rebuilding the full application for every change.
+
+============================================================
+4. EXTRACT / EXPORT WORKFLOW
+============================================================
+
+The owner dashboard contains an:
+    Extract ZIP
+button.
+
+The export engine creates ZIP packages under:
+    exports/
+
+Two concepts are used:
+
+1. Deployment-safe ZIP
+   Intended for GitHub / Render deployment.
+   Excludes runtime sessions, audit streams, and private payment secrets.
+
+2. Full local backup ZIP
+   Intended as a fuller snapshot/backup of the running software.
+
+The export process allows the currently running version of the software to become the next distributable/deployable foundation.
+
+============================================================
+5. COMMIT WORKFLOW
+============================================================
+
+Commit launcher:
+    Commits/Launch_Commit_Tool.bat
+
+Python commit utility:
+    Commits/commit_tool.py
+
+Workflow:
+1. Run Launch_Commit_Tool.bat.
+2. The terminal asks for the path to the latest online/deployed ZIP.
+3. The commit tool compares that online ZIP against the current deployable application state.
+4. It identifies file-level changes.
+5. It produces a commit bundle.
+
+Output location:
+    Commits/commit/<timestamp>/
+
+The commit output is designed to contain the files and metadata needed to update the GitHub version without manually rebuilding the project structure.
+
+Typical output includes:
+- commit bundle ZIP
+- changed/added files
+- deletion information
+- manifest/details
+- suggested commit message
+
+============================================================
+6. DEPLOYMENT WORKFLOW
+============================================================
+
+GITHUB
+------
+The deployment-safe export ZIP can be unpacked/pushed to a GitHub repository.
+The repository can then be connected to Render.
+
+RENDER
+------
+Deployment configuration:
+    render.yaml
+
+Build command:
+    pip install -r requirements.txt
+
+Start command:
+    python server.py
+
+Health check:
+    /health
+
+The supplied Render configuration uses:
+    plan: 0.5c-512mb
+
+Persistent disk mount:
+    /var/data/directory-platform
+
+Environment variable:
+    DATA_DIR=/var/data/directory-platform
+
+The persistent disk is essential because this application intentionally uses JSON/TXT/filesystem storage.
+Without persistent storage, hosted filesystem changes can disappear after redeployment/restart.
+
+Important production environment variables include:
+    DATA_DIR
+    DEV_PASSWORD
+    PUBLIC_BASE_URL
+    DISABLE_DEMO
+    STRIPE_SECRET_KEY
+    PAYPAL_CLIENT_ID
+    PAYPAL_CLIENT_SECRET
+
+Local secrets are not intended to be committed into the deployment ZIP.
+
+============================================================
+7. PAYMENT / MONETIZATION FRAMEWORK
+============================================================
+
+OWNER MONETIZATION OPTIONS
+--------------------------
+The foundation supports three primary monetization paths:
+
+1. Advertising
+   - AdSense configuration
+   - custom sold banner advertising
+
+2. Business listing fees
+   Supported recurring billing frequencies:
+   - daily
+   - weekly
+   - monthly
+   - quarterly
+   - annually
+
+3. Client/homeowner fees
+   Possible charges include:
+   - account creation
+   - job posting
+   - combinations configured by the owner
+
+PAYMENT PROCESSORS
+------------------
+Supported adapters:
+    Stripe
+    PayPal
+
+The owner can configure either or both.
+
+Business listing fees use recurring subscription checkout logic.
+Client account/job charges use one-time checkout logic.
+
+PRODUCTION PAYMENT BOUNDARY
+---------------------------
+The foundation can create real checkout/subscription sessions when valid credentials are supplied.
+
+The first foundation does not yet use the return/redirect page as final proof of payment.
+For full production payment enforcement, a later renovation should add:
+- signed Stripe webhooks
+- signed PayPal webhooks
+- subscription status synchronization
+- cancellation/suspension handling
+- payment-state reconciliation
+- entitlement activation/deactivation
+
+============================================================
+8. DIRECTORY / FILE ARCHITECTURE
+============================================================
+
+Simplified structure:
+
+DirectoryForge_Foundation_v1/
+|
+|-- Launch_DirectoryForge.bat
+|-- Launch_Browser_Server.bat
+|-- Install_Local.bat
+|-- app.py
+|-- app_logic.py
+|-- server.py
+|-- storage.py
+|-- security.py
+|-- sessions.py
+|-- patch_engine.py
+|-- export_engine.py
+|-- payments.py
+|-- render.yaml
+|-- requirements.txt
+|-- requirements-local.txt
+|-- FOUNDATION_MANIFEST.json
+|
+|-- frontend/
+|   `-- index.html
+|
+|-- seed/
+|   |-- config.json
+|   |-- users.json
+|   |-- employees.json
+|   |-- businesses.json
+|   |-- homeowners.json
+|   |-- jobs.json
+|   |-- quotes.json
+|   |-- invites.json
+|   |-- analytics.json
+|   |-- service_tree.json
+|   `-- locations.json
+|
+|-- data/
+|   |-- runtime/
+|   |   |-- sessions.txt
+|   |   |-- audit.txt
+|   |   `-- runtime.txt
+|   `-- private/
+|
+|-- Patch/
+|   |-- patch.txt
+|   |-- inbox/
+|   |-- patched/
+|   |-- failed/
+|   `-- snapshots/
+|
+|-- Renovation/
+|   |-- patch.txt
+|   |-- inbox/
+|   |-- patched/
+|   |-- failed/
+|   `-- snapshots/
+|
+|-- exports/
+|
+|-- Commits/
+|   |-- Launch_Commit_Tool.bat
+|   |-- commit_tool.py
+|   `-- commit/
+|
+`-- tools/
+    `-- import_master_architecture.py
+
+============================================================
+9. DEVELOPMENT PRINCIPLES USED
+============================================================
+
+The foundation follows these rules:
+
+1. PYTHON-FIRST
+   Backend functionality belongs in Python rather than Node.js, PHP, or another backend stack.
+
+2. SINGLE-FILE FRONTEND
+   HTML, CSS, and browser JavaScript remain together in frontend/index.html.
+
+3. FILESYSTEM-NATIVE DATABASE
+   State is human-readable and portable through JSON, TXT, and directory structure.
+
+4. LOCAL-FIRST
+   The application must be usable from a Windows .BAT launcher without requiring a cloud deployment.
+
+5. SAME APP ONLINE
+   The same core application can run through server.py for normal browser/Render hosting.
+
+6. RENOVATION INSTEAD OF REBUILD
+   Future development can be applied through TXT-based Python patches from the Refresh button.
+
+7. SNAPSHOT BEFORE CHANGE
+   Patches create a backup snapshot before modifying the application.
+
+8. EXPORTABLE AT ANY TIME
+   The running version can generate a clean deployment ZIP from inside the owner dashboard.
+
+9. COMMIT-ORIENTED UPDATES
+   The commit utility is designed to convert differences between the latest online ZIP and the new version into a commit-ready bundle.
+
+10. OWNER-CONTROLLED MARKETPLACE
+    Directory branding, tree structure, staff access, users, businesses, jobs, quotes, monetization, and payments remain configurable by the directory owner.
+
+============================================================
+10. END-TO-END WORKFLOW
+============================================================
+
+FOUNDATION BUILD
+    -> Launch locally with .BAT
+    -> pywebview opens application
+    -> Python loads JSON/TXT data
+    -> Owner logs in/configures directory
+    -> Directory operates locally or online
+
+FUTURE UPDATE
+    -> Create Python renovation code in a .txt file
+    -> Drop it into Patch or Renovation
+    -> Owner presses Refresh / Apply Patch
+    -> Snapshot is created
+    -> Patch executes
+    -> Successful patch moves to patched/
+    -> Running software is now updated
+
+RELEASE NEW VERSION
+    -> Owner presses Extract ZIP
+    -> Deployment-safe ZIP is generated
+    -> ZIP becomes the new deployable source
+
+ONLINE UPDATE / COMMIT
+    -> Run Commits/Launch_Commit_Tool.bat
+    -> Provide latest online ZIP
+    -> Tool calculates differences
+    -> Commit bundle is generated
+    -> Apply/push changes to GitHub
+    -> Render redeploys from GitHub
+
+DATA PERSISTENCE ONLINE
+    -> Render mounts persistent disk
+    -> DATA_DIR points to persistent storage
+    -> JSON/TXT marketplace state survives application redeploys/restarts
+
+============================================================
+11. SHORT VERSION
+============================================================
+
+DirectoryForge is essentially:
+
+    ONE HTML FILE FOR THE UI
+            +
+    PYTHON FOR EVERYTHING BEHIND IT
+            +
+    JSON AS THE HARD DRIVE
+            +
+    TXT AS LIGHTWEIGHT RUNTIME MEMORY / PATCH INPUT
+            +
+    DIRECTORIES AS PART OF THE DATABASE AND RELEASE SYSTEM
+            +
+    PYWEBVIEW FOR THE LOCAL WINDOWS APP
+            +
+    .BAT FILES FOR ONE-CLICK LOCAL TOOLS
+            +
+    TXT PYTHON PATCHES FOR RENOVATIONS
+            +
+    ZIP EXPORTS FOR GITHUB / RENDER
+            +
+    A COMMIT DIFF TOOL FOR FUTURE RELEASES
+
+This architecture is intentionally simple, portable, inspectable, patchable, and controlled primarily through Python and the filesystem.

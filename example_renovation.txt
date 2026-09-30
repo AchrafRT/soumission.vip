@@ -1,0 +1,6 @@
+from pathlib import Path
+import os
+root=Path(os.environ['APP_ROOT'])
+# Safe example only. Copy this file into Renovation/inbox/ when you intentionally want to run it.
+(root/'Renovation'/'example_renovation_was_run.txt').write_text('Renovation applied successfully.\n', encoding='utf-8')
+print('Example renovation complete.')

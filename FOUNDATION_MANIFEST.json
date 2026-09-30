@@ -1,0 +1,23 @@
+{
+  "name": "Soumission.VIP",
+  "generated_from": "HousePro_QuotesPro_Master_Marketing_Architecture_22_Angles.txt",
+  "service_nodes": 66,
+  "specialty_roots": 3,
+  "main_categories": 9,
+  "service_subbranches": 54,
+  "regional_hubs": 18,
+  "montreal_example_zones": 27,
+  "version": "1.0.1",
+  "ui": "3D quest / game progression",
+  "growth_lab": true,
+  "lead_capture": true,
+  "conversion_tracking": true,
+  "marketing_engine": "22-law positioning + value-offer + lead-engine principles",
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "role_demo_accounts": {},
+  "portal_upgrade": "Native bilingual service tree + rich Linktree/Kijiji business profiles + private client workspace + 411/Upwork-style public job ads + brand theme controls",
+  "derived_from": "DirectoryForge hardened marketplace foundation"
+}

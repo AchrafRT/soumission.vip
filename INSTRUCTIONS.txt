@@ -1,0 +1,9 @@
+PATCH WORKFLOW
+==============
+1. Put Python patch code into Patch\patch.txt, OR drop one or more .txt patch scripts into Patch\inbox\.
+2. In the owner dashboard, press "Refresh / Apply Patch".
+3. Before each patch, the system writes a pre-patch ZIP snapshot under Patch\snapshots\.
+4. Successful scripts move to Patch\patched\. Failed scripts move to Patch\failed\ with their source preserved.
+5. The patch runs with the application root as its working directory and APP_ROOT available as an environment variable.
+
+A patch file is Python source even though its extension is .txt.

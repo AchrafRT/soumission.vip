@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "project_id": "soumission_vip",
+  "name": "Soumission.VIP",
+  "version": "1.0.1",
+  "root_contract": "sayf-root-1",
+  "status": "launchable",
+  "runtime": "python",
+  "default_port": 8768,
+  "entrypoint": "server.py",
+  "local_command": [
+    "python",
+    "server.py"
+  ],
+  "health_path": "/health",
+  "deployment": {
+    "render": true,
+    "render_mode": "full"
+  },
+  "kind": "home_services_marketplace",
+  "features": [
+    "home_service_taxonomy",
+    "client_portal",
+    "business_portal",
+    "jobs",
+    "quotes",
+    "business_profiles",
+    "lead_capture",
+    "bilingual_en_fr"
+  ],
+  "notes": []
+}

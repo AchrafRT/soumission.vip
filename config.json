@@ -1,0 +1,96 @@
+{
+  "app_name": "Soumission.VIP",
+  "directory_name": "Soumission.VIP",
+  "slogan": "Find local home-service professionals, post jobs, compare quotes.",
+  "logo_data_url": "/brand-logo.png",
+  "onboarding_complete": false,
+  "onboarding_stage": 1,
+  "allow_public_signup": true,
+  "public_base_url": "",
+  "currency": "CAD",
+  "country": "Canada",
+  "created_at": "",
+  "version": "1.0.1",
+  "monetization": {
+    "ads": {
+      "mode": "off",
+      "adsense_client": "",
+      "adsense_slot": "",
+      "custom_banner_text": "",
+      "custom_banner_image": "",
+      "custom_banner_url": ""
+    },
+    "business_listing": {
+      "enabled": false,
+      "cycle": "monthly",
+      "amount_cents": 0
+    },
+    "client_fees": {
+      "account_fee_enabled": false,
+      "account_fee_cents": 0,
+      "job_fee_enabled": false,
+      "job_fee_cents": 0
+    },
+    "payments": {
+      "stripe_enabled": false,
+      "paypal_enabled": false,
+      "paypal_mode": "sandbox"
+    }
+  },
+  "growth": {
+    "positioning": {
+      "category_name": "Local Project Match",
+      "one_liner": "Describe the job once. Unlock relevant local pros. Compare clear quotes.",
+      "enemy": "Calling company after company without a clear scope or comparison.",
+      "candor": "We do not choose the contractor for you. You compare scope, availability, proof and price."
+    },
+    "offer": {
+      "headline": "Turn one project brief into a shortlist of relevant local pros.",
+      "subheadline": "Less chasing. Better context. Clearer quotes.",
+      "primary_cta": "Start My Project Quest",
+      "secondary_cta": "Browse Local Pros",
+      "price_anchor_text": "One clear project brief can replace hours of repetitive outreach.",
+      "guarantee_text": "No fake guarantees: you stay in control and decide who earns the job.",
+      "urgency_text": "Project timing matters. Share your target date so available pros can prioritize correctly.",
+      "bonuses": [
+        "Project Quote Checklist",
+        "Scope-comparison prompts",
+        "Local service-category matching"
+      ]
+    },
+    "lead_engine": {
+      "lead_magnet_title": "Free Project Quote Checklist",
+      "lead_magnet_subtitle": "Know what to ask before you compare contractors.",
+      "referral_prompt": "Know someone planning a home project? Share the directory and save them the contractor-call marathon.",
+      "channels": [
+        "Warm outreach",
+        "Targeted outreach",
+        "Useful content",
+        "Paid acquisition",
+        "Referral and partner loops"
+      ]
+    },
+    "proof": {
+      "proof_points": [
+        "Clear service taxonomy",
+        "Direct company requests + open job board",
+        "Owner-controlled marketplace rules"
+      ],
+      "featured_stat_label": "service paths ready to browse",
+      "featured_stat_value": "54+"
+    }
+  },
+  "brand_theme": {
+    "primary": "#5b5cf0",
+    "secondary": "#2d7ff9",
+    "accent": "#18b6d9",
+    "background": "#eef3fb",
+    "surface": "#ffffff",
+    "text": "#0b1424"
+  },
+  "default_language": "en",
+  "enabled_languages": [
+    "en",
+    "fr"
+  ]
+}

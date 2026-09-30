@@ -1,0 +1,6 @@
+from pathlib import Path
+import os
+root=Path(os.environ['APP_ROOT'])
+# Example: create a marker showing that the patch ran.
+(root/'Patch'/'example_patch_was_run.txt').write_text('Patch applied successfully.\n', encoding='utf-8')
+print('Example patch complete.')

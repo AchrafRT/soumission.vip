@@ -1,0 +1,269 @@
+{
+  "hubs": [
+    {
+      "id": "hub-01",
+      "name": "Greater Toronto Area",
+      "region": "Ontario",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-02",
+      "name": "Ottawa Metro",
+      "region": "Ontario",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-03",
+      "name": "Hamilton & Niagara",
+      "region": "Ontario",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-04",
+      "name": "Southwestern Ontario (London/Windsor)",
+      "region": "Ontario",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-05",
+      "name": "Greater Montreal Area",
+      "region": "Quebec",
+      "active": true,
+      "zones": [
+        {
+          "id": "mtl-zone-01",
+          "name": "Downtown Montreal",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-02",
+          "name": "Old Montreal",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-03",
+          "name": "Plateau Mont-Royal",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-04",
+          "name": "Mile End",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-05",
+          "name": "Westmount",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-06",
+          "name": "Notre-Dame-de-Grâce",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-07",
+          "name": "Verdun",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-08",
+          "name": "LaSalle",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-09",
+          "name": "Lachine",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-10",
+          "name": "Saint-Laurent",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-11",
+          "name": "Ahuntsic",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-12",
+          "name": "Villeray",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-13",
+          "name": "Rosemont",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-14",
+          "name": "Hochelaga",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-15",
+          "name": "Anjou",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-16",
+          "name": "Saint-Léonard",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-17",
+          "name": "Mont-Royal",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-18",
+          "name": "Outremont",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-19",
+          "name": "Pointe-Claire",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-20",
+          "name": "Dollard-des-Ormeaux",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-21",
+          "name": "Laval (Chomedey)",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-22",
+          "name": "Laval (Vimont)",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-23",
+          "name": "Longueuil",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-24",
+          "name": "Brossard",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-25",
+          "name": "Boucherville",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-26",
+          "name": "Saint-Hubert",
+          "active": true
+        },
+        {
+          "id": "mtl-zone-27",
+          "name": "Repentigny",
+          "active": true
+        }
+      ]
+    },
+    {
+      "id": "hub-06",
+      "name": "Quebec City Metro",
+      "region": "Quebec",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-07",
+      "name": "Gatineau & Outaouais",
+      "region": "Quebec",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-08",
+      "name": "Metro Vancouver",
+      "region": "British Columbia",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-09",
+      "name": "Vancouver Island (Victoria)",
+      "region": "British Columbia",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-10",
+      "name": "Okanagan Valley (Kelowna)",
+      "region": "British Columbia",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-11",
+      "name": "Calgary Metro",
+      "region": "Alberta",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-12",
+      "name": "Edmonton Metro",
+      "region": "Alberta",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-13",
+      "name": "Winnipeg Metro",
+      "region": "Prairies (SK & MB)",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-14",
+      "name": "Saskatoon & Regina",
+      "region": "Prairies (SK & MB)",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-15",
+      "name": "Halifax & Nova Scotia",
+      "region": "Atlantic Canada",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-16",
+      "name": "New Brunswick Hubs",
+      "region": "Atlantic Canada",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-17",
+      "name": "Newfoundland & PEI",
+      "region": "Atlantic Canada",
+      "active": true,
+      "zones": []
+    },
+    {
+      "id": "hub-18",
+      "name": "Northern Territories Hub (Yukon, NWT, Nunavut)",
+      "region": "The North",
+      "active": true,
+      "zones": []
+    }
+  ],
+  "zone_template_count": 27,
+  "example_hub": "Greater Montreal Area",
+  "micro_mapping_rule": "Build meaningful local zones using population, housing density, travel patterns, homeowner concentration, service coverage, and recognizable local names. Avoid fake neighbourhood names."
+}
